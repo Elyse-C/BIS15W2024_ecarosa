@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output:
   html_document: 
     theme: spacelab
-    keep_md: yes
+    keep_md: true
 ---
 
 ## Instructions
@@ -13,13 +13,15 @@ Answer the following questions and complete the exercises in RMarkdown. Please e
 
 Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
 
-**1. Please complete the [class survey](https://forms.gle/AHHXd3aobaAdkkFg9) if you have not already done so.**
-Survey completed.
+**1. Please complete the [class survey](https://forms.gle/AHHXd3aobaAdkkFg9) if you have not already done so.**  
+Survey completed.  
 **2. What is the difference between R and RStudio? What is GitHub and why is it useful to programmers?**  
-R is the scripting language. You essentially tell it what you want it to do (give it commands), and it does it for you. It is the program, and RStudio is the GUI (geographical user interface). RStudio is easier to use than R, which makes it more popular. GitHub is a platform that uses GIT to track changes to code and information written using R. It lets people everywhere to view uploaded code, and see previous drafts of it. This allows for collaboration and the potential for errors to be found.
+R is the scripting language. You essentially tell it what you want it to do (give it commands), and it does it for you. It is the program, and RStudio is the GUI (Geographical User Interface). RStudio is easier to use than R, which makes it more popular.  
+GitHub is a platform that uses GIT to track changes to code and information written using R. It lets people everywhere view uploaded code and see previous drafts of it. This allows for collaboration and the potential for errors to be found.
 
 
 **3. Navigate to my [BIS15L](https://github.com/jmledford3115/BIS15LW2024_jledford) repository on GitHub. Notice that near the bottom there is a nice, clean description of the repository. You want this on your repository! It is built by making edits to the `README.md` file using the RMarkdown conventions. Edit your repository's `README.md` file so that you have a clean informative description, including your email address. Be creative! You don't need to just copy mine. There are lots of examples online.**  
+Done
 
 **4. Calculate the following expressions. Be sure to include each one in a separate code chunk.**  
 ```{r}
@@ -31,8 +33,7 @@ R is the scripting language. You essentially tell it what you want it to do (giv
 ```
 
 **5. Did any of the results in #4 surprise you? Write two programs that calculate each expression such that the result for the first example is 4 and the second example is 8.**    
-
-The results were somewhat suprising because I knew there were multiple option 
+The results weren't very surprising. Both equations lacked any parenthesis to guide the software in its calculations, so the answers were what I expected based on that. However, it was interesting to see how many ways there are to manipulate equations to get different answers, even if it just means adding something as seemingly insignificant as a set of parenthesis.  
 
 ```{r}
 (5 - 3) * 2
