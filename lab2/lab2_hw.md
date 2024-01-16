@@ -14,10 +14,10 @@ Answer the following questions and complete the exercises in RMarkdown. Please e
 Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
 
 1. What is a vector in R?    
-A vector is a structure designed to group together data.
+A vector is a structure designed to group together data. It puts everything into a list with all of your data in it which keeps it organized and together.
 
 2. What is a data matrix in R?  
-A data matrix is also a structure and is meant to group together strings of vectors.
+A data matrix is also a structure and is meant to group together strings of vectors. It also organizes your vectors into rows and columns, which organizes your data and makes it easier to read and analyze.
 
 3. Below are data collected by three scientists (Jill, Steve, Susan in order) measuring temperatures of eight hot springs. Run this code chunk to create the vectors.  
 
