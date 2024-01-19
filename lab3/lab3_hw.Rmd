@@ -135,6 +135,14 @@ animal_sleep[43]
 animal_name[43]
 ```
 
+```{r}
+max(sleep$sleep_total)
+```
+
+```{r}
+filter(sleep, sleep_total==19.9)
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

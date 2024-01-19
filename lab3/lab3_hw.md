@@ -497,5 +497,27 @@ animal_name[43]
 ```
 
 
+```r
+max(sleep$sleep_total)
+```
+
+```
+## [1] 19.9
+```
+
+
+```r
+filter(sleep, sleep_total==19.9)
+```
+
+```
+## # A tibble: 1 × 11
+##   name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+##   <chr>   <chr> <chr> <chr> <chr>              <dbl>     <dbl>       <dbl> <dbl>
+## 1 Little… Myot… inse… Chir… <NA>                19.9         2         0.2   4.1
+## # ℹ 2 more variables: brainwt <dbl>, bodywt <dbl>
+```
+
+
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   
