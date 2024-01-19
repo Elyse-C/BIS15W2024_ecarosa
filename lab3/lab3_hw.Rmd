@@ -29,14 +29,17 @@ library(tidyverse)
 sleep <- msleep
 ```
 
-3. What are the dimensions of this data frame (variables and observations)? How do you know?  The dimensions are 83 variables and 11 observations. I know this because I ran the dimensions using the code below. I also opened the file, which tells me the format (including rows and variables).  
+3. What are the dimensions of this data frame (variables and observations)? How do you know?  
+
+The dimensions are 83 variables and 11 observations. I know this because I ran the dimensions using the code below. I also opened the file, which tells me the format (including rows and variables).  
 
 Please show the *code* that you used to determine this below.  
 ```{r}
 dim(sleep)
 ```
 
-4. Are there any NAs in the data? How did you determine this? Please show your code.   Yes, there are NAs in the data. I determined this by running glimpse, and noticed there were a few NAs in it.  
+4. Are there any NAs in the data? How did you determine this? Please show your code.    
+Yes, there are NAs in the data. I determined this by running glimpse, and noticed there were a few NAs in it.  
 ```{r}
 glimpse(sleep)
 ```
@@ -46,7 +49,7 @@ glimpse(sleep)
 colnames(sleep)
 ```
 
-6. How many herbivores are represented in the data?  
+6. How many herbivores are represented in the data?    
 32  
 ```{r}
 table(sleep$vore)
@@ -110,9 +113,28 @@ most_sleep
 ```
 
 ```{r}
-sleeps <- data.frame(sleep$name, sleep$sleep_total)
-sleeps
+animal_name <- c(sleep$name)
+animal_name
 ```
+
+```{r}
+animal_sleep <- c(sleep$sleep_total)
+animal_sleep
+```
+
+```{r}
+which(animal_sleep==19.9)
+```
+
+
+```{r}
+animal_sleep[43]
+```
+
+```{r}
+animal_name[43]
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

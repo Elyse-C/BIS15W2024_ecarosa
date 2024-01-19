@@ -36,7 +36,9 @@ library(tidyverse)
 sleep <- msleep
 ```
 
-3. What are the dimensions of this data frame (variables and observations)? How do you know?  The dimensions are 83 variables and 11 observations. I know this because I ran the dimensions using the code below. I also opened the file, which tells me the format (including rows and variables).  
+3. What are the dimensions of this data frame (variables and observations)? How do you know?  
+
+The dimensions are 83 variables and 11 observations. I know this because I ran the dimensions using the code below. I also opened the file, which tells me the format (including rows and variables).  
 
 Please show the *code* that you used to determine this below.  
 
@@ -48,7 +50,8 @@ dim(sleep)
 ## [1] 83 11
 ```
 
-4. Are there any NAs in the data? How did you determine this? Please show your code.   Yes, there are NAs in the data. I determined this by running glimpse, and noticed there were a few NAs in it.  
+4. Are there any NAs in the data? How did you determine this? Please show your code.    
+Yes, there are NAs in the data. I determined this by running glimpse, and noticed there were a few NAs in it.  
 
 ```r
 glimpse(sleep)
@@ -82,7 +85,7 @@ colnames(sleep)
 ## [11] "bodywt"
 ```
 
-6. How many herbivores are represented in the data?  
+6. How many herbivores are represented in the data?    
 32  
 
 ```r
@@ -401,96 +404,98 @@ most_sleep
 
 
 ```r
-sleeps <- data.frame(sleep$name, sleep$sleep_total)
-sleeps
+animal_name <- c(sleep$name)
+animal_name
 ```
 
 ```
-##                        sleep.name sleep.sleep_total
-## 1                         Cheetah              12.1
-## 2                      Owl monkey              17.0
-## 3                 Mountain beaver              14.4
-## 4      Greater short-tailed shrew              14.9
-## 5                             Cow               4.0
-## 6                Three-toed sloth              14.4
-## 7               Northern fur seal               8.7
-## 8                    Vesper mouse               7.0
-## 9                             Dog              10.1
-## 10                       Roe deer               3.0
-## 11                           Goat               5.3
-## 12                     Guinea pig               9.4
-## 13                         Grivet              10.0
-## 14                     Chinchilla              12.5
-## 15                Star-nosed mole              10.3
-## 16      African giant pouched rat               8.3
-## 17      Lesser short-tailed shrew               9.1
-## 18           Long-nosed armadillo              17.4
-## 19                     Tree hyrax               5.3
-## 20         North American Opossum              18.0
-## 21                 Asian elephant               3.9
-## 22                  Big brown bat              19.7
-## 23                          Horse               2.9
-## 24                         Donkey               3.1
-## 25              European hedgehog              10.1
-## 26                   Patas monkey              10.9
-## 27      Western american chipmunk              14.9
-## 28                   Domestic cat              12.5
-## 29                         Galago               9.8
-## 30                        Giraffe               1.9
-## 31                    Pilot whale               2.7
-## 32                      Gray seal               6.2
-## 33                     Gray hyrax               6.3
-## 34                          Human               8.0
-## 35                 Mongoose lemur               9.5
-## 36               African elephant               3.3
-## 37           Thick-tailed opposum              19.4
-## 38                        Macaque              10.1
-## 39               Mongolian gerbil              14.2
-## 40                 Golden hamster              14.3
-## 41                          Vole               12.8
-## 42                    House mouse              12.5
-## 43               Little brown bat              19.9
-## 44           Round-tailed muskrat              14.6
-## 45                     Slow loris              11.0
-## 46                           Degu               7.7
-## 47     Northern grasshopper mouse              14.5
-## 48                         Rabbit               8.4
-## 49                          Sheep               3.8
-## 50                     Chimpanzee               9.7
-## 51                          Tiger              15.8
-## 52                         Jaguar              10.4
-## 53                           Lion              13.5
-## 54                         Baboon               9.4
-## 55                Desert hedgehog              10.3
-## 56                          Potto              11.0
-## 57                     Deer mouse              11.5
-## 58                      Phalanger              13.7
-## 59                   Caspian seal               3.5
-## 60                Common porpoise               5.6
-## 61                        Potoroo              11.1
-## 62                Giant armadillo              18.1
-## 63                     Rock hyrax               5.4
-## 64                 Laboratory rat              13.0
-## 65          African striped mouse               8.7
-## 66                Squirrel monkey               9.6
-## 67          Eastern american mole               8.4
-## 68                     Cotton rat              11.3
-## 69                       Mole rat              10.6
-## 70         Arctic ground squirrel              16.6
-## 71 Thirteen-lined ground squirrel              13.8
-## 72 Golden-mantled ground squirrel              15.9
-## 73                     Musk shrew              12.8
-## 74                            Pig               9.1
-## 75            Short-nosed echidna               8.6
-## 76      Eastern american chipmunk              15.8
-## 77                Brazilian tapir               4.4
-## 78                         Tenrec              15.6
-## 79                     Tree shrew               8.9
-## 80           Bottle-nosed dolphin               5.2
-## 81                          Genet               6.3
-## 82                     Arctic fox              12.5
-## 83                        Red fox               9.8
+##  [1] "Cheetah"                        "Owl monkey"                    
+##  [3] "Mountain beaver"                "Greater short-tailed shrew"    
+##  [5] "Cow"                            "Three-toed sloth"              
+##  [7] "Northern fur seal"              "Vesper mouse"                  
+##  [9] "Dog"                            "Roe deer"                      
+## [11] "Goat"                           "Guinea pig"                    
+## [13] "Grivet"                         "Chinchilla"                    
+## [15] "Star-nosed mole"                "African giant pouched rat"     
+## [17] "Lesser short-tailed shrew"      "Long-nosed armadillo"          
+## [19] "Tree hyrax"                     "North American Opossum"        
+## [21] "Asian elephant"                 "Big brown bat"                 
+## [23] "Horse"                          "Donkey"                        
+## [25] "European hedgehog"              "Patas monkey"                  
+## [27] "Western american chipmunk"      "Domestic cat"                  
+## [29] "Galago"                         "Giraffe"                       
+## [31] "Pilot whale"                    "Gray seal"                     
+## [33] "Gray hyrax"                     "Human"                         
+## [35] "Mongoose lemur"                 "African elephant"              
+## [37] "Thick-tailed opposum"           "Macaque"                       
+## [39] "Mongolian gerbil"               "Golden hamster"                
+## [41] "Vole "                          "House mouse"                   
+## [43] "Little brown bat"               "Round-tailed muskrat"          
+## [45] "Slow loris"                     "Degu"                          
+## [47] "Northern grasshopper mouse"     "Rabbit"                        
+## [49] "Sheep"                          "Chimpanzee"                    
+## [51] "Tiger"                          "Jaguar"                        
+## [53] "Lion"                           "Baboon"                        
+## [55] "Desert hedgehog"                "Potto"                         
+## [57] "Deer mouse"                     "Phalanger"                     
+## [59] "Caspian seal"                   "Common porpoise"               
+## [61] "Potoroo"                        "Giant armadillo"               
+## [63] "Rock hyrax"                     "Laboratory rat"                
+## [65] "African striped mouse"          "Squirrel monkey"               
+## [67] "Eastern american mole"          "Cotton rat"                    
+## [69] "Mole rat"                       "Arctic ground squirrel"        
+## [71] "Thirteen-lined ground squirrel" "Golden-mantled ground squirrel"
+## [73] "Musk shrew"                     "Pig"                           
+## [75] "Short-nosed echidna"            "Eastern american chipmunk"     
+## [77] "Brazilian tapir"                "Tenrec"                        
+## [79] "Tree shrew"                     "Bottle-nosed dolphin"          
+## [81] "Genet"                          "Arctic fox"                    
+## [83] "Red fox"
 ```
+
+
+```r
+animal_sleep <- c(sleep$sleep_total)
+animal_sleep
+```
+
+```
+##  [1] 12.1 17.0 14.4 14.9  4.0 14.4  8.7  7.0 10.1  3.0  5.3  9.4 10.0 12.5 10.3
+## [16]  8.3  9.1 17.4  5.3 18.0  3.9 19.7  2.9  3.1 10.1 10.9 14.9 12.5  9.8  1.9
+## [31]  2.7  6.2  6.3  8.0  9.5  3.3 19.4 10.1 14.2 14.3 12.8 12.5 19.9 14.6 11.0
+## [46]  7.7 14.5  8.4  3.8  9.7 15.8 10.4 13.5  9.4 10.3 11.0 11.5 13.7  3.5  5.6
+## [61] 11.1 18.1  5.4 13.0  8.7  9.6  8.4 11.3 10.6 16.6 13.8 15.9 12.8  9.1  8.6
+## [76] 15.8  4.4 15.6  8.9  5.2  6.3 12.5  9.8
+```
+
+
+```r
+which(animal_sleep==19.9)
+```
+
+```
+## [1] 43
+```
+
+
+
+```r
+animal_sleep[43]
+```
+
+```
+## [1] 19.9
+```
+
+
+```r
+animal_name[43]
+```
+
+```
+## [1] "Little brown bat"
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   
