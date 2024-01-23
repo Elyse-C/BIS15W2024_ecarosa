@@ -3,9 +3,9 @@ title: "Lab 4 Homework"
 author: "Please Add Your Name Here"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -76,12 +76,12 @@ taxa
 
 **5. The variable `taxon` identifies the common name groups of the species represented in `homerange`. Make a table the shows the counts for each of these `taxon`.**  
 ```{r}
-
+table(homerange$taxon)
 ```
 
 **6. The species in `homerange` are also classified into trophic guilds. How many species are represented in each trophic guild.**  
 ```{r}
-
+table(homerange$trophic.guild)
 ```
 
 ##Finish 1-6
