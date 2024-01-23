@@ -59,8 +59,17 @@ class(homerange$taxon)
 ```
 
 ```{r}
+levels(homerange$taxon)
+```
+
+
+```{r}
 homerange$order <- as.factor(homerange$order)
 class(homerange$order)
+```
+
+```{r}
+levels(homerange$order)
 ```
 
 

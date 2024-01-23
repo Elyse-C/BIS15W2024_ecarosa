@@ -187,12 +187,49 @@ class(homerange$taxon)
 
 
 ```r
+levels(homerange$taxon)
+```
+
+```
+## [1] "birds"         "lake fishes"   "lizards"       "mammals"      
+## [5] "marine fishes" "river fishes"  "snakes"        "tortoises"    
+## [9] "turtles"
+```
+
+
+
+```r
 homerange$order <- as.factor(homerange$order)
 class(homerange$order)
 ```
 
 ```
 ## [1] "factor"
+```
+
+
+```r
+levels(homerange$order)
+```
+
+```
+##  [1] "accipitriformes"       "afrosoricida"          "anguilliformes"       
+##  [4] "anseriformes"          "apterygiformes"        "artiodactyla"         
+##  [7] "caprimulgiformes"      "carnivora"             "charadriiformes"      
+## [10] "columbidormes"         "columbiformes"         "coraciiformes"        
+## [13] "cuculiformes"          "cypriniformes"         "dasyuromorpha"        
+## [16] "dasyuromorpia"         "didelphimorphia"       "diprodontia"          
+## [19] "diprotodontia"         "erinaceomorpha"        "esociformes"          
+## [22] "falconiformes"         "gadiformes"            "galliformes"          
+## [25] "gruiformes"            "lagomorpha"            "macroscelidea"        
+## [28] "monotrematae"          "passeriformes"         "pelecaniformes"       
+## [31] "peramelemorphia"       "perciformes"           "perissodactyla"       
+## [34] "piciformes"            "pilosa"                "proboscidea"          
+## [37] "psittaciformes"        "rheiformes"            "roden"                
+## [40] "rodentia"              "salmoniformes"         "scorpaeniformes"      
+## [43] "siluriformes"          "soricomorpha"          "squamata"             
+## [46] "strigiformes"          "struthioniformes"      "syngnathiformes"      
+## [49] "testudines"            "tinamiformes"          "tetraodontiformes\xa0"
 ```
 
 
