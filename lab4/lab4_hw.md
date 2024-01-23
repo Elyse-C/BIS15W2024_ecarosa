@@ -1,6 +1,6 @@
 ---
 title: "Lab 4 Homework"
-author: "Please Add Your Name Here"
+author: "Elyse Carosa"
 date: "2024-01-23"
 output:
   html_document: 
