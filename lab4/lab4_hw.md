@@ -1,7 +1,7 @@
 ---
 title: "Lab 4 Homework"
 author: "Elyse Carosa"
-date: "2024-01-23"
+date: "2024-01-25"
 output:
   html_document: 
     theme: spacelab
@@ -229,7 +229,7 @@ levels(homerange$order)
 ## [40] "rodentia"              "salmoniformes"         "scorpaeniformes"      
 ## [43] "siluriformes"          "soricomorpha"          "squamata"             
 ## [46] "strigiformes"          "struthioniformes"      "syngnathiformes"      
-## [49] "testudines"            "tinamiformes"          "tetraodontiformes\xa0"
+## [49] "testudines"            "tetraodontiformes\xa0" "tinamiformes"
 ```
 
 
