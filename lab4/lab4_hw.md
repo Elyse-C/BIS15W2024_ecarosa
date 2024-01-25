@@ -229,7 +229,7 @@ levels(homerange$order)
 ## [40] "rodentia"              "salmoniformes"         "scorpaeniformes"      
 ## [43] "siluriformes"          "soricomorpha"          "squamata"             
 ## [46] "strigiformes"          "struthioniformes"      "syngnathiformes"      
-## [49] "testudines"            "tetraodontiformes\xa0" "tinamiformes"
+## [49] "testudines"            "tinamiformes"          "tetraodontiformes\xa0"
 ```
 
 
@@ -303,21 +303,189 @@ table(homerange$trophic.guild)
 ##       342       227
 ```
 
-##Finish 1-6
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 
+```r
+carnivores <- filter(homerange, trophic.guild=="carnivore")
+carnivores
+```
+
+```
+## # A tibble: 342 × 24
+##    taxon        common.name class order family genus species primarymethod N    
+##    <fct>        <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+##  1 lake fishes  american e… acti… angu… angui… angu… rostra… telemetry     16   
+##  2 river fishes blacktail … acti… cypr… catos… moxo… poecil… mark-recaptu… <NA> 
+##  3 river fishes central st… acti… cypr… cypri… camp… anomal… mark-recaptu… 20   
+##  4 river fishes rosyside d… acti… cypr… cypri… clin… fundul… mark-recaptu… 26   
+##  5 river fishes longnose d… acti… cypr… cypri… rhin… catara… mark-recaptu… 17   
+##  6 river fishes muskellunge acti… esoc… esoci… esox  masqui… telemetry     5    
+##  7 marine fish… pollack     acti… gadi… gadid… poll… pollac… telemetry     2    
+##  8 marine fish… saithe      acti… gadi… gadid… poll… virens  telemetry     2    
+##  9 marine fish… giant trev… acti… perc… caran… cara… ignobi… telemetry     4    
+## 10 lake fishes  rock bass   acti… perc… centr… ambl… rupest… mark-recaptu… 16   
+## # ℹ 332 more rows
+## # ℹ 15 more variables: mean.mass.g <dbl>, log10.mass <dbl>,
+## #   alternative.mass.reference <chr>, mean.hra.m2 <dbl>, log10.hra <dbl>,
+## #   hra.reference <chr>, realm <chr>, thermoregulation <chr>, locomotion <chr>,
+## #   trophic.guild <chr>, dimension <dbl>, preymass <dbl>, log10.preymass <dbl>,
+## #   PPMR <dbl>, prey.size.reference <chr>
+```
+
+
+```r
+herbivores <- filter(homerange, trophic.guild=="herbivore")
+herbivores
+```
+
+```
+## # A tibble: 227 × 24
+##    taxon        common.name class order family genus species primarymethod N    
+##    <fct>        <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+##  1 marine fish… lined surg… acti… perc… acant… acan… lineat… direct obser… <NA> 
+##  2 marine fish… orangespin… acti… perc… acant… naso  litura… telemetry     8    
+##  3 marine fish… bluespine … acti… perc… acant… naso  unicor… telemetry     7    
+##  4 marine fish… redlip ble… acti… perc… blenn… ophi… atlant… direct obser… 20   
+##  5 marine fish… bermuda ch… acti… perc… kypho… kyph… sectat… telemetry     11   
+##  6 marine fish… cherubfish  acti… perc… pomac… cent… argi    direct obser… <NA> 
+##  7 marine fish… damselfish  acti… perc… pomac… chro… chromis direct obser… <NA> 
+##  8 marine fish… twinspot d… acti… perc… pomac… chry… biocel… direct obser… 18   
+##  9 marine fish… wards dams… acti… perc… pomac… poma… wardi   direct obser… <NA> 
+## 10 marine fish… australian… acti… perc… pomac… steg… apical… direct obser… <NA> 
+## # ℹ 217 more rows
+## # ℹ 15 more variables: mean.mass.g <dbl>, log10.mass <dbl>,
+## #   alternative.mass.reference <chr>, mean.hra.m2 <dbl>, log10.hra <dbl>,
+## #   hra.reference <chr>, realm <chr>, thermoregulation <chr>, locomotion <chr>,
+## #   trophic.guild <chr>, dimension <dbl>, preymass <dbl>, log10.preymass <dbl>,
+## #   PPMR <dbl>, prey.size.reference <chr>
+```
+
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
+###Carnivores have, on average, a larger "mean.hra.m2" value.  
+
+```r
+mean(carnivores$mean.hra.m2, na.rm=T)
+```
+
+```
+## [1] 13039918
+```
 
 
+```r
+mean(herbivores$mean.hra.m2, na.rm=T)
+```
+
+```
+## [1] 34137012
+```
 
 
 **9. Make a new dataframe `owls` that is limited to the mean mass, log10 mass, family, genus, and species of owls in the database. Which is the smallest owl? What is its common name? Do a little bit of searching online to see what you can learn about this species and provide a link below** 
 
+```r
+owl <- filter(homerange, class=="aves")
+```
 
+
+```r
+owly <- filter(owl, order=="strigiformes")
+owly
+```
+
+```
+## # A tibble: 9 × 24
+##   taxon common.name        class order  family genus species primarymethod N    
+##   <fct> <chr>              <chr> <fct>  <chr>  <chr> <chr>   <chr>         <chr>
+## 1 birds boreal owl         aves  strig… strig… aego… funere… telemetry*    <NA> 
+## 2 birds long-eared owl     aves  strig… strig… asio  otus    telemetry*    <NA> 
+## 3 birds little owl         aves  strig… strig… athe… noctua  telemetry*    <NA> 
+## 4 birds Eurasian eagle-owl aves  strig… strig… bubo  bubo    telemetry*    <NA> 
+## 5 birds great horned owl   aves  strig… strig… bubo  virgin… direct obser… <NA> 
+## 6 birds Eurasian pygmy owl aves  strig… strig… glau… passer… telemetry*    <NA> 
+## 7 birds snowy owl          aves  strig… strig… nyct… scandi… direct obser… <NA> 
+## 8 birds tawny owl          aves  strig… strig… strix aluco   direct obser… 55   
+## 9 birds barn owl           aves  strig… tyton… tyto  alba    telemetry*    <NA> 
+## # ℹ 15 more variables: mean.mass.g <dbl>, log10.mass <dbl>,
+## #   alternative.mass.reference <chr>, mean.hra.m2 <dbl>, log10.hra <dbl>,
+## #   hra.reference <chr>, realm <chr>, thermoregulation <chr>, locomotion <chr>,
+## #   trophic.guild <chr>, dimension <dbl>, preymass <dbl>, log10.preymass <dbl>,
+## #   PPMR <dbl>, prey.size.reference <chr>
+```
+
+
+```r
+owls <- select(owly, "mean.mass.g", "log10.mass", "family", "genus", "species")
+owls
+```
+
+```
+## # A tibble: 9 × 5
+##   mean.mass.g log10.mass family    genus      species    
+##         <dbl>      <dbl> <chr>     <chr>      <chr>      
+## 1       119         2.08 strigidae aegolius   funereus   
+## 2       252         2.40 strigidae asio       otus       
+## 3       156.        2.19 strigidae athene     noctua     
+## 4      2191         3.34 strigidae bubo       bubo       
+## 5      1510         3.18 strigidae bubo       virginianus
+## 6        61.3       1.79 strigidae glaucidium passerinum 
+## 7      1920         3.28 strigidae nyctea     scandiaca  
+## 8       519         2.72 strigidae strix      aluco      
+## 9       285         2.45 tytonidae tyto       alba
+```
+    
+
+```r
+arrange(owls, mean.mass.g)
+```
+
+```
+## # A tibble: 9 × 5
+##   mean.mass.g log10.mass family    genus      species    
+##         <dbl>      <dbl> <chr>     <chr>      <chr>      
+## 1        61.3       1.79 strigidae glaucidium passerinum 
+## 2       119         2.08 strigidae aegolius   funereus   
+## 3       156.        2.19 strigidae athene     noctua     
+## 4       252         2.40 strigidae asio       otus       
+## 5       285         2.45 tytonidae tyto       alba       
+## 6       519         2.72 strigidae strix      aluco      
+## 7      1510         3.18 strigidae bubo       virginianus
+## 8      1920         3.28 strigidae nyctea     scandiaca  
+## 9      2191         3.34 strigidae bubo       bubo
+```
+
+The smallest owl is the Passernium Glaucodium, otherwise known as the Eurasian pygmy owl. I learned that they tend to live in coniferous forests, and can live up to six years. They are usually alone, unless it's mating season, and are nocturnal. They rarely leave their home/location unless they are in urgent need of food/water/other resources. They also have rather large feet, which allows them to catch food up to their size. For more information, check [here](https://animaldiversity.org/accounts/Glaucidium_passerinum/)  
+
+    
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 
+```r
+homerange%>%
+  select(mean.hra.m2, common.name, class)%>%
+  filter(class=="aves")%>%
+  arrange(mean.hra.m2)
+```
+
+```
+## # A tibble: 140 × 3
+##    mean.hra.m2 common.name             class
+##          <dbl> <chr>                   <chr>
+##  1       1052. indigo bunting          aves 
+##  2       1214. Carolina wren           aves 
+##  3       1335. yellow-breasted chat    aves 
+##  4       1335. white-eyed vireo        aves 
+##  5       1700. American yellow warbler aves 
+##  6       1781. least flycatcher        aves 
+##  7       1942. American redstart       aves 
+##  8       2590. inca dove               aves 
+##  9       2800  Dartford warbler        aves 
+## 10       3237. wrentit                 aves 
+## # ℹ 130 more rows
+```
+
+The species with the largest homerange is the Caracara. This bird is found in the American tropics, this bird is similar to the hawk, and is not afriad to fight off larger birds for food. Their diet consists mainly of smaller animals, although there is a lot of variety in what animals they will consume, including anything from rabbits to young alligators. For more information on the Caracara, click [here](https://www.audubon.org/field-guide/bird/crested-caracara) 
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

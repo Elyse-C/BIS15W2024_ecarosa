@@ -93,7 +93,6 @@ table(homerange$taxon)
 table(homerange$trophic.guild)
 ```
 
-##Finish 1-6
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 ```{r}
@@ -108,10 +107,15 @@ herbivores
 
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
+###Carnivores have, on average, a larger "mean.hra.m2" value.  
 ```{r}
-mean_carnivores <- select(carnivores, mean.hra.m2)
-mean_carnivores
+mean(carnivores$mean.hra.m2, na.rm=T)
 ```
+
+```{r}
+mean(herbivores$mean.hra.m2, na.rm=T)
+```
+
 
 **9. Make a new dataframe `owls` that is limited to the mean mass, log10 mass, family, genus, and species of owls in the database. Which is the smallest owl? What is its common name? Do a little bit of searching online to see what you can learn about this species and provide a link below** 
 ```{r}
@@ -119,19 +123,31 @@ owl <- filter(homerange, class=="aves")
 ```
 
 ```{r}
-owls <- filter(owls, order=="strigiformes")
-owls
+owly <- filter(owl, order=="strigiformes")
+owly
 ```
 
 ```{r}
-select(owls, "mean.mass.g", "log10.mass", "family", "genus", "species")
+owls <- select(owly, "mean.mass.g", "log10.mass", "family", "genus", "species")
+owls
 ```
-       
+    
+```{r}
+arrange(owls, mean.mass.g)
+```
+
+The smallest owl is the Passernium Glaucodium, otherwise known as the Eurasian pygmy owl. I learned that they tend to live in coniferous forests, and can live up to six years. They are usually alone, unless it's mating season, and are nocturnal. They rarely leave their home/location unless they are in urgent need of food/water/other resources. They also have rather large feet, which allows them to catch food up to their size. For more information, check [here](https://animaldiversity.org/accounts/Glaucidium_passerinum/)  
+
     
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 ```{r}
-
+homerange%>%
+  select(mean.hra.m2, common.name, class)%>%
+  filter(class=="aves")%>%
+  arrange(mean.hra.m2)
 ```
+
+The species with the largest homerange is the Caracara. This bird is found in the American tropics, this bird is similar to the hawk, and is not afriad to fight off larger birds for food. Their diet consists mainly of smaller animals, although there is a lot of variety in what animals they will consume, including anything from rabbits to young alligators. For more information on the Caracara, click [here](https://www.audubon.org/field-guide/bird/crested-caracara) 
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   
