@@ -2,10 +2,11 @@
 title: "dplyr Superhero"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: yes
-    toc_float: yes
+    toc: true
+    toc_float: true
+    keep_md: true
 ---
 
 ## Learning Goals  
@@ -41,12 +42,12 @@ The `janitor` package has many awesome functions that we will explore. Here is i
 tabyl(superhero_info, alignment)
 ```
 
-1. Who are the publishers of the superheros? Show the proportion of superheros from each publisher. Which publisher has the highest number of superheros?  
-## Marvel
+1. Who are the publishers of the superheros? Show the proportion of superheros from each publisher. Which publisher has the highest number of superheros?    
+## Marvel Comics
 
 ```{r}
 superhero_publisher <- tabyl(superhero_info, publisher)
-arrange(superhero_publisher)
+arrange(superhero_publisher, percent)
 ```
 
 
@@ -73,9 +74,9 @@ superhero_info %>%
 4. List all of the superheros that are not human.
 
 ```{r}
-race_info <- superhero_info %>% 
-  select(name, race)
-filter(race_info, - "human")
+superhero_info %>% 
+  select(name, race) %>% 
+  filter(!(race=="Human"))
 ```
 
 
@@ -126,23 +127,102 @@ superhero_info %>%
 ```
 
 
-9. Are there more good guys or bad guys with green hair?  
+9. Are there more good guys or bad guys with green hair?    
+## Good guys
+
+```{r}
+superhero_info %>%
+  select("name", "alignment", "hair_color") %>% 
+  filter(alignment=="good") %>% 
+  filter(hair_color=="Green")
+```
+
+```{r}
+superhero_info %>% 
+  select("name", "alignment", "hair_color") %>% 
+  filter(alignment=="bad") %>% 
+  filter(hair_color=="Green")
+```
+
 
 10. Let's explore who the really small superheros are. In the `superhero_info` data, which have a weight less than 50? Be sure to sort your results by weight lowest to highest.  
 
-11. Let's make a new variable that is the ratio of height to weight. Call this variable `height_weight_ratio`.    
+```{r}
+small <- superhero_info %>% 
+  select(name, weight) %>% 
+  filter(weight<50)
+small
+```
 
-12. Who has the highest height to weight ratio?  
+```{r}
+arrange(small, weight)
+```
+
+
+11. Let's make a new variable that is the ratio of height to weight. Call this variable `height_weight_ratio`.   
+
+```{r}
+superhero_info_new <- superhero_info %>% 
+  mutate(height_weight_ratio = height/weight)
+superhero_info_new
+```
+
+
+12. Who has the highest height to weight ratio?   
+## Groot
+
+```{r}
+superhero_info_new %>% 
+  select(name, height_weight_ratio) %>% 
+arrange(desc(superhero_info_new$height_weight_ratio))
+```
+
 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 
-13. How many superheros have a combination of agility, stealth, super_strength, stamina?
+```{r}
+glimpse(superhero_powers)
+```
+
+
+13. How many superheros have a combination of agility, stealth, super_strength, stamina?  
+
+## 40 superheros
+```{r}
+superhero_powers %>% 
+  select(hero_names, agility, stealth, super_strength, stamina) %>% 
+  filter(agility=="TRUE") %>% 
+  filter(stealth=="TRUE") %>% 
+  filter(super_strength=="TRUE") %>% 
+  filter(stamina=="TRUE")
+```
+
 
 ## Your Favorite
 14. Pick your favorite superhero and let's see their powers!  
 
-15. Can you find your hero in the superhero_info data? Show their info!  
+```{r}
+loki_info <- superhero_powers %>%
+  filter(hero_names=="Loki")
+loki_info
+```
 
+```{r}
+loki_powers <- loki_info %>% 
+  select(hero_names, accelerated_healing, durability, flight, longevity, intelligence, super_strength, stamina, energy_beams, magic, shapeshifting)
+```
+
+```{r}
+names(loki_powers)
+```
+
+
+15. Can you find your hero in the superhero_info data? Show their info!
+
+```{r}
+superhero_info %>%
+  filter(name=="Loki")
+```
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.  
