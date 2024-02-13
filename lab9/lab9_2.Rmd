@@ -59,7 +59,7 @@ expenditures %>%
   pivot_longer(-expenditure,
                names_to = "year",
                values_to = "bn_dollars") %>% 
-  filter(expenditure=="Medical and Health") %>% 
+  filter(expenditure=="Private Education") %>% 
   arrange(-bn_dollars)
 ```
 
