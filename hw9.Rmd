@@ -27,7 +27,7 @@ library(naniar)
 
 For this homework, we will take a departure from biological data and use data about California colleges. These data are a subset of the national college scorecard (https://collegescorecard.ed.gov/data/). Load the `ca_college_data.csv` as a new object called `colleges`.
 ```{r}
-
+colleges <- read_csv("lab10/data/ca_college_data.csv") %>% clean_names()
 ```
 
 The variables are a bit hard to decipher, here is a key:  
@@ -45,17 +45,84 @@ PFTFTUG1_EF: Percentage of undergraduate students who are first-time, full-time 
 
 1. Use your preferred function(s) to have a look at the data and get an idea of its structure. Make sure you summarize NA's and determine whether or not the data are tidy. You may also consider dealing with any naming issues.
 
+```{r}
+glimpse(colleges)
+```
+
+```{r}
+sum(is.na(colleges))
+```
+
+
 2. Which cities in California have the highest number of colleges?
+
+```{r}
+colleges %>% 
+  select(instnm, city) %>% 
+  group_by(city) %>% 
+  summarize(school_total=n_distinct(instnm)) %>% 
+  arrange(desc(school_total))
+```
+
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
 
+```{r}
+colleges %>% 
+  top_n(+10, city) %>% 
+  group_by(city) %>% 
+  summarize(total_colleges=n_distinct(instnm)) %>% 
+  ggplot(aes(x=city, y=total_colleges))+
+           geom_col()
+```
+
+
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
+
+## Claremont has the highest average cost, and is located in eastern Los Angeles.
+
+```{r}
+colleges %>% 
+  select(costt4_a, city) %>% 
+  group_by(city) %>% 
+  summarize(average_cost=mean(costt4_a, na.rm=T)) %>% 
+  arrange(desc(average_cost))
+```
+
 
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 
+```{r}
+colleges %>% 
+  select(costt4_a, city, instnm) %>% 
+  filter(city=="Claremont") %>% 
+  group_by(instnm) %>% 
+  ggplot(aes(x=costt4_a, y=instnm))+
+  geom_col()
+```
+
+
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 
+## Colleges with higher admission rates have fewer students finishing all four years, whereas more selective colleges have more students finishing.
+
+```{r}
+colleges %>% 
+  ggplot(aes(x=adm_rate, y=c150_4_pooled))+
+  geom_point()
+```
+
+
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
+
+## The more a school costs, the more student are willing to stay for four years. This is likely because, if you're making such a large investment in your education, you'd better finish it.
+
+```{r}
+colleges %>% 
+  ggplot(aes(x=costt4_a, y=c150_4_pooled))+
+  geom_point()
+```
+
 
 8. The column titled `INSTNM` is the institution name. We are only interested in the University of California colleges. Make a new data frame that is restricted to UC institutions. You can remove `Hastings College of Law` and `UC San Francisco` as we are only interested in undergraduate institutions.
 
