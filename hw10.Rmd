@@ -3,9 +3,9 @@ title: "Homework 10"
 author: "Elyse Carosa"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -32,6 +32,8 @@ deserts <- read_csv("lab11/data/surveys_complete.csv") %>% clean_names()
 
 1. Use the function(s) of your choice to get an idea of its structure, including how NA's are treated. Are the data tidy?  
 
+## Yes, the data is tidy.
+
 ```{r}
 glimpse(deserts)
 ```
@@ -44,17 +46,76 @@ head(deserts)
 2. How many genera and species are represented in the data? What are the total number of observations? Which species is most/ least frequently sampled in the study?
 
 ```{r}
+deserts %>% 
+  count(genus, species, record_id, sort=T) %>% 
+  summarize(n_distinct(genus),
+            n_distinct(species),
+            n_distinct(record_id))
+```
 
+```{r}
+deserts %>%
+  count(species, sort=T) %>% 
+  arrange(desc(n))
 ```
 
 
 3. What is the proportion of taxa included in this study? Show a table and plot that reflects this count.
 
+```{r}
+deserts %>% 
+  tabyl(taxa)
+```
+
+```{r}
+deserts %>% 
+  ggplot(aes(x=taxa))+ 
+  geom_bar(position="dodge")+
+  scale_y_log10(labels = scales::percent)+
+  labs(title="Number of Individuals per Taxon", 
+       x="Taxonomic Group")
+```
+
+
 4. For the taxa included in the study, use the fill option to show the proportion of individuals sampled by `plot_type.`
+
+```{r}
+deserts %>% 
+  ggplot(aes(x=taxa, fill=plot_type))+ 
+  geom_bar(position="dodge")+
+  scale_y_log10(labels = scales::percent)+
+  labs(title="Number of Individuals per Taxon", 
+       x="Taxonomic Group",
+       fill="Individuals")
+```
+
 
 5. What is the range of weight for each species included in the study? Remove any observations of weight that are NA so they do not show up in the plot.
 
+```{r}
+deserts %>% 
+  filter(!weight=="NA") %>% 
+  ggplot(aes(x=species, y=log10(weight), fill=species))+
+  geom_boxplot(position="dodge")+
+  theme(axis.text.x=element_text(angle=60, hjust = 1))+
+  labs(title="Range of Weight per Species", 
+       x="Species",
+       fill="Species Name")
+```
+
+
 6. Add another layer to your answer from #5 using `geom_point` to get an idea of how many measurements were taken for each species.
+
+```{r}
+deserts %>% 
+  filter(!weight=="NA") %>% 
+  ggplot(aes(x=species, y=log10(weight)))+
+  geom_point(position="dodge")+
+  theme(axis.text.x=element_text(angle=60, hjust = 1))+
+  labs(title="Range of Weight per Species", 
+       x="Species")
+```
+
 
 7. [Dipodomys merriami](https://en.wikipedia.org/wiki/Merriam's_kangaroo_rat) is the most frequently sampled animal in the study. How have the number of observations of this species changed over the years included in the study?
 
