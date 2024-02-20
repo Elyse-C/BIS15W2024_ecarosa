@@ -1,6 +1,6 @@
 ---
 title: "Homework 10"
-author: "Please Add Your Name Here"
+author: "Elyse Carosa"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -27,12 +27,26 @@ library(naniar)
 ## Desert Ecology
 For this assignment, we are going to use a modified data set on [desert ecology](http://esapubs.org/archive/ecol/E090/118/). The data are from: S. K. Morgan Ernest, Thomas J. Valone, and James H. Brown. 2009. Long-term monitoring and experimental manipulation of a Chihuahuan Desert ecosystem near Portal, Arizona, USA. Ecology 90:1708.
 ```{r}
-deserts <- read_csv("data/surveys_complete.csv") %>% clean_names()
+deserts <- read_csv("lab11/data/surveys_complete.csv") %>% clean_names()
 ```
 
 1. Use the function(s) of your choice to get an idea of its structure, including how NA's are treated. Are the data tidy?  
 
+```{r}
+glimpse(deserts)
+```
+
+```{r}
+head(deserts)
+```
+
+
 2. How many genera and species are represented in the data? What are the total number of observations? Which species is most/ least frequently sampled in the study?
+
+```{r}
+
+```
+
 
 3. What is the proportion of taxa included in this study? Show a table and plot that reflects this count.
 
