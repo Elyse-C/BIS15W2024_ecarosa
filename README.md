@@ -9,4 +9,7 @@ I like to read and listen to music in my free time. I also have two dogs I love 
 ### Contact Info:  
 Feel free to contact me by [email](ercarosa@ucdavis.edu)  
 
+### Homework:
+My homework is located in the "Homework" folder.
+
 ## Thank you for checking out my page!  
