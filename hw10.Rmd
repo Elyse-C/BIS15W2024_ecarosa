@@ -109,21 +109,98 @@ deserts %>%
 ```{r}
 deserts %>% 
   filter(!weight=="NA") %>% 
-  ggplot(aes(x=species, y=log10(weight)))+
-  geom_point(position="dodge")+
+  ggplot(aes(x=species, y=log10(weight), fill=species))+
+  geom_boxplot(position="dodge")+
   theme(axis.text.x=element_text(angle=60, hjust = 1))+
   labs(title="Range of Weight per Species", 
-       x="Species")
+       x="Species",
+       fill="Species Name")+
+  geom_point()
 ```
 
 
 7. [Dipodomys merriami](https://en.wikipedia.org/wiki/Merriam's_kangaroo_rat) is the most frequently sampled animal in the study. How have the number of observations of this species changed over the years included in the study?
 
+```{r}
+deserts %>% 
+  select(genus, species, year) %>% 
+  filter(genus=="Dipodomys", species=="merriami") %>%
+  group_by(year) %>% 
+  count(genus, species) %>% 
+  arrange(desc(n))
+```
+
+```{r}
+deserts %>% 
+  select(genus, species, year) %>% 
+  filter(genus=="Dipodomys", species=="merriami") %>%
+  ggplot(aes(x=year))+
+  geom_bar()+
+  labs(title="Number of Observations of Dipodomys merriami", 
+       x="Year")
+```
+
+
 8. What is the relationship between `weight` and `hindfoot` length? Consider whether or not over plotting is an issue.
+
+```{r}
+deserts %>% 
+  ggplot(aes(x=log10(weight), y=log10(hindfoot_length)))+
+  geom_jitter(na.rm=T)+
+  labs(title="Weight vs. Hindfoot Length", 
+       x="Log10 Weight",
+       y="Log10 Hindfoot Length")
+```
+
 
 9. Which two species have, on average, the highest weight? Once you have identified them, make a new column that is a ratio of `weight` to `hindfoot_length`. Make a plot that shows the range of this new ratio and fill by sex.
 
+```{r}
+deserts %>%
+  select(species, weight) %>% 
+  filter(!weight=="NA") %>% 
+  group_by(species) %>% 
+  summarize(average=mean(weight)) %>% 
+  arrange(desc(average))
+  
+```
+
+```{r}
+deserts %>%
+  select(species, weight, hindfoot_length) %>% 
+  filter(!weight=="NA") %>% 
+  group_by(species) %>% 
+  summarize(average=mean(weight),
+            average2=mean(hindfoot_length, na.rm=T)) %>% 
+  mutate(ratio_weight_to_hindfoot_length = average/average2)
+```
+
+```{r}
+deserts %>% 
+  filter(!weight=="NA") %>% 
+  filter(!hindfoot_length=="NA") %>% 
+  ggplot(aes(x=weight, y=hindfoot_length, fill=sex))+
+  geom_boxplot()+
+  labs(title="Ratio of Weight to Hindfoot Length", 
+       x="Weight",
+       y="Hindfoot Length",
+       fill="Sex")
+```
+
+
+
 10. Make one plot of your choice! Make sure to include at least two of the aesthetics options you have learned.
+
+```{r}
+deserts %>% 
+  ggplot(aes(x=species, fill=genus))+
+  geom_bar()+
+  labs(title="Observations of Species", 
+       x="Species",
+       fill="Genus")+
+  coord_flip()
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
