@@ -141,7 +141,8 @@ deserts %>%
 ```
 
 
-8. What is the relationship between `weight` and `hindfoot` length? Consider whether or not over plotting is an issue.
+8. What is the relationship between `weight` and `hindfoot` length? Consider whether or not over plotting is an issue. 
+## There is definitely an issue with over plotting.
 
 ```{r}
 deserts %>% 
@@ -177,16 +178,17 @@ deserts %>%
 
 ```{r}
 deserts %>% 
-  filter(!weight=="NA") %>% 
-  filter(!hindfoot_length=="NA") %>% 
-  ggplot(aes(x=weight, y=hindfoot_length, fill=sex))+
-  geom_boxplot()+
-  labs(title="Ratio of Weight to Hindfoot Length", 
-       x="Weight",
-       y="Hindfoot Length",
-       fill="Sex")
+  filter(!sex=="NA") %>% 
+  group_by(species) %>%
+  mutate(average1=mean(weight, na.rm=T),
+         average2=mean(hindfoot_length, na.rm=T)) %>% 
+  ggplot(aes(x=average1, y=average2, color=sex))+
+  geom_point(na.rm=T)+
+  labs(title="Average Weight vs. Average Hindfoot Length", 
+       x="Average Weight",
+       y="Average Hindfoot Length",
+       color="Sex")
 ```
-
 
 
 10. Make one plot of your choice! Make sure to include at least two of the aesthetics options you have learned.
@@ -197,8 +199,10 @@ deserts %>%
   geom_bar()+
   labs(title="Observations of Species", 
        x="Species",
+       y="Number of Observations",
        fill="Genus")+
-  coord_flip()
+  coord_flip()+
+  scale_y_log10()
 ```
 
 
