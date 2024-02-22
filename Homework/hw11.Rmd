@@ -1,6 +1,6 @@
 ---
 title: "Lab 11 Homework"
-author: "Please Add Your Name Here"
+author: "Elyse Carosa"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -46,9 +46,57 @@ The questions below are open-ended and have many possible solutions. Your approa
 
 **1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine how NAs are treated in the data.**  
 
+```{r}
+glimpse(gapminder)
+```
+
+```{r}
+summary(gapminder)
+```
+
+```{r}
+anyNA(gapminder)
+```
+
+
 **2. Among the interesting variables in gapminder is life expectancy. How has global life expectancy changed between 1952 and 2007?**
 
+```{r}
+gapminder %>% 
+  select(lifeExp, year) %>% 
+  filter(year>=1952 & year<=2007) %>% 
+  mutate(year=as.factor(year)) %>% 
+  group_by(year)
+```
+
+```{r}
+gapminder %>% 
+  select(lifeExp, year) %>% 
+  filter(year>=1952 & year<=2007) %>% 
+  mutate(year=as.factor(year)) %>% 
+  group_by(year) %>% 
+  ggplot(aes(x=year, y=lifeExp))+
+  geom_col(fill="black", color="lavender")+
+  labs(title="Life Expectancy Over the Years",
+       x="Year",
+       y="Life Expectancy")
+```
+
+
 **3. How do the distributions of life expectancy compare for the years 1952 and 2007?**
+
+```{r}
+gapminder %>% 
+  filter(year==1952 | year==2007) %>% 
+  mutate(year=as.factor(year)) %>% 
+  group_by(year) %>% 
+  ggplot(aes(x=year, y=lifeExp))+
+  geom_col(fill="lavender")+
+  labs(title="Life Expectancy Over the Years",
+       x="Year",
+       y="Life Expectancy")
+```
+
 
 **4. Your answer above doesn't tell the whole story since life expectancy varies by region. Make a summary that shows the min, mean, and max life expectancy by continent for all years represented in the data.**
 
